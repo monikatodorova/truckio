@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+</head>
+<body>
+HOME PAGE
+
+<ul th:each="kompanija : ${kompanii}">
+    <li th:text="${kompanija.getIme()}" ></li>
+</ul>
+</body>
+</html>
