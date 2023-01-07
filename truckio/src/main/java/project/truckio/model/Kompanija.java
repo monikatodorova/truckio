@@ -4,9 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "kompanii",schema = "project")
-@Data
 public class Kompanija {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +22,7 @@ public class Kompanija {
     @Column(name = "kompanija_telefon", nullable = false, length = 300)
     private String kompanija_telefon;
 
-    public Kompanija(Integer kompanija_id, String kompanija_ime, String kompanija_adresa, String kompanija_telefon) {
-        this.kompanija_id = kompanija_id;
+    public Kompanija(String kompanija_ime, String kompanija_adresa, String kompanija_telefon) {
         this.kompanija_ime = kompanija_ime;
         this.kompanija_adresa = kompanija_adresa;
         this.kompanija_telefon = kompanija_telefon;

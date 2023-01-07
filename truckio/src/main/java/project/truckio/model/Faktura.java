@@ -23,4 +23,14 @@ public class Faktura {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "administrator_id")
     private Administrator administrator;
+
+    public Faktura(Integer faktura_iznos, Rezervacija rezervacija, Administrator administrator) {
+        this.faktura_iznos = faktura_iznos;
+        this.rezervacija = rezervacija;
+        this.administrator = administrator;
+    }
+
+    public Faktura() {
+
+    }
 }

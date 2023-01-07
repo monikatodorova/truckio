@@ -24,4 +24,14 @@ public class Roba {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "kategorija_id")
     private Kategorija kategorija;
+
+    public Roba(Integer roba_kolicina, Rezervacija rezervacija, Kategorija kategorija) {
+        this.roba_kolicina = roba_kolicina;
+        this.rezervacija = rezervacija;
+        this.kategorija = kategorija;
+    }
+
+    public Roba() {
+
+    }
 }

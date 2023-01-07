@@ -20,6 +20,12 @@ public class Licenca {
     @Column(name = "licenca_vazi_do", nullable = false)
     private LocalDate licenca_vazi_do;
 
+    @MapsId("kompanija_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "kompanija_id")
+    private Kompanija kompanija;
+
+
 //    // vrski
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "kompanija_id")

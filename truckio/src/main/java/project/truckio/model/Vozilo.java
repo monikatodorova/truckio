@@ -33,7 +33,7 @@ public class Vozilo {
     @JoinColumn(name = "vozac_id")
     private Vozac vozac;
 
-    public Vozilo(String vozilo_marka, Integer vozilo_kapacitet) {
+    public Vozilo(String vozilo_marka, Integer vozilo_kapacitet, Kompanija kompanija, Tip tip, Vozac vozac) {
         this.vozilo_marka = vozilo_marka;
         this.vozilo_kapacitet = vozilo_kapacitet;
     }

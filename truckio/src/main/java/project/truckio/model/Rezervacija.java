@@ -24,4 +24,14 @@ public class Rezervacija {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ruta_id")
     private Ruta ruta;
+
+    public Rezervacija(String rezervacija_status, Klient klient, Ruta ruta) {
+        this.rezervacija_status = rezervacija_status;
+        this.klient = klient;
+        this.ruta = ruta;
+    }
+
+    public Rezervacija() {
+
+    }
 }
