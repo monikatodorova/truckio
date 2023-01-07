@@ -30,11 +30,12 @@ public class Vraboten {
     @JoinColumn(name = "kompanija_id")
     private Kompanija kompanija;
 
-    public Vraboten(String vraboten_ime, String vraboten_prezime, String vraboten_email, String vraboten_password) {
+    public Vraboten(String vraboten_ime, String vraboten_prezime, String vraboten_email, String vraboten_password, Kompanija kompanija) {
         this.vraboten_ime = vraboten_ime;
         this.vraboten_prezime = vraboten_prezime;
         this.vraboten_email = vraboten_email;
         this.vraboten_password = vraboten_password;
+        this.kompanija = kompanija;
     }
 
     public Vraboten() {}

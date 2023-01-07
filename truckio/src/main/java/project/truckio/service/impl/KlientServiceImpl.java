@@ -7,6 +7,9 @@ import project.truckio.model.exceptions.*;
 import project.truckio.repository.KlientRepository;
 import project.truckio.service.KlientService;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class KlientServiceImpl implements KlientService {
 
@@ -42,5 +45,16 @@ public class KlientServiceImpl implements KlientService {
         }
         return klientRepository.findByEmailAndPassword(email, CryptWithMD5.cryptWithMD5(password)).orElseThrow(InvalidUserCredentialsException::new);
     }
+
+    @Override
+    public Optional<Klient> findById(Integer klientId) {
+        return klientRepository.findById(klientId);
+    }
+
+    @Override
+    public List<Klient> findAll() {
+        return klientRepository.findAll();
+    }
+
 
 }

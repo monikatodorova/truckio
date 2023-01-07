@@ -25,5 +25,10 @@ public class KompanijaServiceImpl implements KompanijaService {
         return this.kompanijaRepository.findById(kompanija_id).get();
     }
 
+    @Override
+    public Kompanija registerKompanija(String kompanija_ime, String kompanija_adresa, String kompanija_telefon) {
+        return kompanijaRepository.save(new Kompanija(kompanija_ime, kompanija_adresa, kompanija_telefon));
+    }
+
 
 }

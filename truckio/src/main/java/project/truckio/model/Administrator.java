@@ -15,4 +15,12 @@ public class Administrator {
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "administrator_id", nullable = false)
     private Vraboten vraboten;
+
+    public Administrator(Vraboten vraboten) {
+        this.vraboten = vraboten;
+    }
+
+    public Administrator() {
+
+    }
 }

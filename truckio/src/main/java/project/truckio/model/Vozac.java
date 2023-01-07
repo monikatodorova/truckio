@@ -15,4 +15,12 @@ public class Vozac {
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vozac_id", nullable = false)
     private Vraboten vraboten;
+
+    public Vozac(Vraboten vraboten) {
+        this.vraboten = vraboten;
+    }
+
+    public Vozac() {
+
+    }
 }

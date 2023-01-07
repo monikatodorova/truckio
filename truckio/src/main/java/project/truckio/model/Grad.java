@@ -9,14 +9,14 @@ import javax.persistence.*;
 @Data
 public class Grad {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "grad_id", nullable = false)
     private Integer grad_id;
 
     @Column(name = "grad_ime", nullable = false, length = 300)
     private String grad_ime;
 
-    public Grad(Integer grad_id, String grad_ime) {
-        this.grad_id = grad_id;
+    public Grad(String grad_ime) {
         this.grad_ime = grad_ime;
     }
 

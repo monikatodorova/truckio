@@ -15,4 +15,12 @@ public class Kategorija {
 
     @Column(name = "kategorija_ime", nullable = false, length = 300)
     private String kategorija_ime;
+
+    public Kategorija(String kategorija_ime) {
+        this.kategorija_ime = kategorija_ime;
+    }
+
+    public Kategorija() {
+
+    }
 }

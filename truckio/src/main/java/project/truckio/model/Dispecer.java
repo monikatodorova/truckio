@@ -15,4 +15,12 @@ public class Dispecer {
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "dispecer_id", nullable = false)
     private Vraboten vraboten;
+
+    public Dispecer(Vraboten vraboten) {
+        this.vraboten = vraboten;
+    }
+
+    public Dispecer() {
+
+    }
 }

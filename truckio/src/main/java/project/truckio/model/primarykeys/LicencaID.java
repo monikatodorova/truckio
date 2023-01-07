@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class LicencaID implements Serializable {
     private static final long serialVersionUID = -8688686914310645850L;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "licenca_id", nullable = false)
     private Integer licenca_id;
 
