@@ -32,7 +32,6 @@ public class LoginController {
         try{
             klient = this.klientService.login(request.getParameter("email"), request.getParameter("password"));
             request.getSession().setAttribute("klient", klient);
-            System.out.println("KLIENTTT + " + klient.getKlient_ime());
             return "redirect:/home";
         } catch (InvalidUserCredentialsException exception) {
             model.addAttribute("hasError", true);

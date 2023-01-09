@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface KategorijaService {
     Kategorija addKategorija(String kategorijaIme);
-    Optional<Kategorija> findById(Integer kategorijaId);
+    Kategorija findById(Integer kategorijaId);
     List<Kategorija> findAll();
 }

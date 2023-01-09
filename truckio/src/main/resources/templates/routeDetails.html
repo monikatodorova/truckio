@@ -1,12 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Route Details </title>
+  <meta charset="UTF-8">
+  <title>Routes</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
+<nav class="navbar navbar-expand-md">
+  <div class="container">
+    <!-- Navbar Brand -->
+    <a class="navbar-brand" href="/home">
+      <img th:src="@{/img/logo.png}">
+    </a>
 
-<h4>Details for route_id: <th:block th:text="${Ruta.ruta_id}"></th:block></h4>
+    <!-- Navbar -->
+    <div class="collapsed navbar-collapse" id="navbarDefault">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link">Компании</a>
+        </li>
+        <li class="nav-item">
+          <a href="/routes" class="nav-link">Рути</a>
+        </li>
+        <li class="nav-item">
+          <a href="/reservations" class="nav-link">Мои Резервации</a>
+        </li>
+        <li class="nav-item nav-button">
+          <a href="/logout" class="nav-link">Одјави се</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<th:block>
+
+  <div class="route-details">
+
+    <div class="container">
+      <h3>Резервирај рута</h3>
+      <div class="route-box">
+        <div class="row">
+          <div class="col-md-6">
+
+            <div class="row">
+              <div class="col-md-6">
+                <div>
+                  <p>Од</p>
+                  <h4><th:block th:text="${ruta.zapocnuva_vo.getGrad_ime()}"></th:block></h4>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <p>До</p>
+                  <h4><th:block th:text="${ruta.zavrsuva_vo.getGrad_ime()}"></th:block></h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div>
+                  <p>Тргнува на</p>
+                  <h4><th:block th:text="${ruta.datum_poagjanje}"></th:block></h4>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <p>Пристигнува на</p>
+                  <h4><th:block th:text="${ruta.datum_pristiganje}"></th:block></h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div>
+                  <p>Компанија</p>
+                  <h4><th:block th:text="${ruta.vozilo.kompanija.getKompanija_ime()}"></th:block></h4>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <p>Возач</p>
+                  <h4><th:block th:text="${ruta.vozac.vraboten.getVraboten_ime()}"></th:block></h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div>
+                  <p>Тип на возило</p>
+                  <h4><th:block th:text="${ruta.vozilo.tip.getTip_ime()}"></th:block></h4>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <p>Капацитет на возило</p>
+                  <h4><th:block th:text="${ruta.vozilo.getVozilo_kapacitet()}"></th:block> тон</h4>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-6">
+            <div>
+              <p>Роба за транспорт</p>
+              <h4>Роба</h4>
+
+              <form class="form-signin" method="post" action="/reservations">
+                <div th:text="${param.error}" class="text-danger"></div>
+                <input type="hidden" name="ruta_id" th:value="${ruta.getRuta_id()}">
+                <div id="entries">
+                  <div class="row">
+                    <div class="col-md-6" style="padding-right: 5px;">
+                      <select name="kategorija[]" id="category_0" class="form-control">
+                        <option
+                                th:each="kategorija : ${kategorii}"
+                                th:text="${kategorija.getKategorija_ime()}"
+                                th:value="${kategorija.getKategorija_id()}">
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-md-5" style="padding-left: 5px; padding-right: 5px;">
+                      <input type="text" id="kolicina_0" name="kolicina[]" class="form-control" placeholder="Количина"
+                             required="">
+                    </div>
+                    <div class="col-md-1" style="padding-left: 5px;">
+                      <a class="remove-entry" data-action="deleteEntry">X</a>
+                    </div>
+                  </div>
+                </div>
+                <a class="btn btn-secondary btn-block" data-action="addNewEntry">Додај нова ставка</a>
+                <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Резервирај</button>
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</th:block>
+
+
+<div class="footer">
+  <div class="container">
+    <p>© Сите права се задржани. 2023</p>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+
+    // Get categories
+    let categories = [];
+    $("#category_0 option").each(function() {
+      categories.push({
+        value: $(this).attr("value"),
+        text: $(this).text(),
+      });
+    });
+
+    // On button add click
+    let entries = 1;
+    $('[data-action="addNewEntry"]').click(function (e) {
+      e.preventDefault();
+
+      let options = '';
+      categories.forEach(category => {
+        options += '<option value="'+ category.value +'">'+ category.text +'</option>';
+      })
+
+      $("#entries").append(`
+                <div class="row">
+                    <div class="col-md-6" style="padding-right: 5px;">
+                      <select name="kategorija[]" id="category_`+ entries +`" class="form-control">
+                        `+ options +`
+                      </select>
+                    </div>
+                    <div class="col-md-5" style="padding-left: 5px; padding-right: 5px;">
+                      <input type="text" id="kolicina_`+ entries +`" name="kolicina[]" class="form-control" placeholder="Количина"
+                             required="">
+                    </div>
+                    <div class="col-md-1" style="padding-left: 5px;">
+                      <a class="remove-entry" data-action="deleteEntry">X</a>
+                    </div>
+                  </div>
+      `);
+      entries++;
+    });
+
+    // On button delete click
+    $(document).on("click", '[data-action="deleteEntry"]', function (e) {
+      e.preventDefault();
+
+      let row = $(this).parent().parent();
+      console.log(row);
+      $("#entries").find(row).remove();
+
+    })
+
+
+  })
+</script>
 
 </body>
 </html>
