@@ -21,4 +21,5 @@ public class Grad {
     }
 
     public Grad() {}
+
 }

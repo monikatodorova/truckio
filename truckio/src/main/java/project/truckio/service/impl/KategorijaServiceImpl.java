@@ -23,8 +23,8 @@ public class KategorijaServiceImpl implements KategorijaService {
     }
 
     @Override
-    public Optional<Kategorija> findById(Integer kategorijaId) {
-        return kategorijaRepository.findById(kategorijaId);
+    public Kategorija findById(Integer kategorijaId) {
+        return kategorijaRepository.findById(kategorijaId).get();
     }
 
     @Override

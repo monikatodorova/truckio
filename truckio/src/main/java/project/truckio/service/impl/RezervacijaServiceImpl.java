@@ -42,4 +42,9 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     public List<Rezervacija> findAll() {
         return rezervacijaRepository.findAll();
     }
+
+    @Override
+    public List<Rezervacija> findMyReservations(Integer klient_id) {
+        return rezervacijaRepository.findMyReservations(klient_id);
+    }
 }

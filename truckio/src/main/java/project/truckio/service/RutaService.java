@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RutaService {
-    Ruta addRuta(LocalDate datum_poagjanje, LocalDate datum_pristiganje, Integer zapocnuvaVoId, Integer zavrsuvaVoId, Integer dispecerId, Integer vozacId);
-    Optional<Ruta> findById(Integer rutaId);
+    Ruta addRuta(LocalDate datum_poagjanje, LocalDate datum_pristiganje, Integer zapocnuvaVoId, Integer zavrsuvaVoId, Integer voziloId, Integer dispecerId, Integer vozacId);
+    Ruta findById(Integer rutaId);
     List<Ruta> findAll();
+    List<Ruta> findAllAvailable();
 }

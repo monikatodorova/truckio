@@ -38,12 +38,21 @@ public class Ruta {
     @JoinColumn(name = "vozac_id")
     private Vozac vozac;
 
-    public Ruta(LocalDate datum_poagjanje, LocalDate datum_pristiganje, Grad zapocnuva_vo, Grad zavrsuva_vo, Dispecer dispecer, Vozac vozac) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vozilo_id")
+    private Vozilo vozilo;
+
+    public Ruta(LocalDate datum_poagjanje, LocalDate datum_pristiganje, Grad zapocnuva_vo, Grad zavrsuva_vo, Vozilo vozilo, Dispecer dispecer, Vozac vozac) {
         this.datum_poagjanje = datum_poagjanje;
         this.datum_pristiganje = datum_pristiganje;
         this.zapocnuva_vo = zapocnuva_vo;
         this.zavrsuva_vo = zavrsuva_vo;
+        this.vozilo = vozilo;
         this.dispecer = dispecer;
         this.vozac = vozac;
+    }
+
+    public Ruta() {
+
     }
 }

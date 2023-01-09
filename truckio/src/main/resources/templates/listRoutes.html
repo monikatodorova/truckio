@@ -27,10 +27,10 @@
                     <a href="/routes" class="nav-link">Рути</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Резервации</a>
+                    <a href="/reservations" class="nav-link">Мои Резервации</a>
                 </li>
                 <li class="nav-item nav-button">
-                    <a href="/login" class="nav-link">Најави се</a>
+                    <a href="/logout" class="nav-link">Одјави се</a>
                 </li>
             </ul>
         </div>
@@ -41,48 +41,47 @@
 <th:block>
 
     <div class="routes">
-        <div class="routes-box">
-            <div>
-                <h3 style="font-weight: bold"> Достапни рути.</h3>
-                <div class="row">
-                    <ul class="col-m">
-                        <li th:each="ruta : ${ruti}">
 
-                            <div class="">
-                                <p class="pp">Од <h4><th:block th:text="${ruta.zapocnuva_vo.getCityName()}"></th:block>
-                                </h4>
-                                </p>
-                            </div>
-
+        <div class="container">
+            <h3>Достапни рути</h3>
+            <div th:each="ruta : ${ruti}">
+                <div class="route-box">
+                    <div class="row">
+                        <div class="col-md-2">
                             <div>
-                                <img th:src="@{img/arrow.png}">
+                                <p>Започнува во</p>
+                                <h4><th:block th:text="${ruta.zapocnuva_vo.getGrad_ime()}"></th:block></h4>
                             </div>
-
+                        </div>
+                        <div class="col-md-1">
+                            <img th:src="@{img/arrow.png}">
+                        </div>
+                        <div class="col-md-2">
                             <div>
-                                <p class="pp">До <h4><th:block th:text="${ruta.zavrsuva_vo.getCityName()}"></th:block>
-                                </h4>
-                                </p>
+                                <p>Завршува во</p>
+                                <h4><th:block th:text="${ruta.zavrsuva_vo.getGrad_ime()}"></th:block></h4>
                             </div>
-
+                        </div>
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-2">
                             <div>
-                                <p class="pp">Тргнува на <h4> <th:block th:text="${ruta.datum_poagjanje}"></th:block>
-                                </h4>
-                                </p>
+                                <p>Тргнува на</p>
+                                <h4><th:block th:text="${ruta.datum_poagjanje}"></th:block></h4>
                             </div>
-
+                        </div>
+                        <div class="col-md-2">
                             <div>
-                                <p class="pp">Пристигнува на <h4> <th:block th:text="${ruta.datum_pristiganje}"></th:block>
-                                </h4>
-                                </p>
+                                <p>Пристигнува на</p>
+                                <h4><th:block th:text="${ruta.datum_pristiganje}"></th:block></h4>
                             </div>
-
+                        </div>
+                        <div class="col-md-2">
                             <a th:href="@{/routes/details/{id} (id=${ruta.ruta_id})}" class="btn btn-primary">Детали</a>
-
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
 
     </div>

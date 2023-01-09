@@ -4,27 +4,30 @@ package project.truckio.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import project.truckio.model.Kategorija;
 import project.truckio.model.Ruta;
+import project.truckio.service.KategorijaService;
 import project.truckio.service.RutaService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/routes")
+
 public class RoutesController {
 
     private final RutaService rutaService;
+    private final KategorijaService kategorijaService;
 
-    public RoutesController(RutaService rutaService) {
+    public RoutesController(RutaService rutaService, KategorijaService kategorijaService) {
         this.rutaService = rutaService;
+        this.kategorijaService = kategorijaService;
     }
 
     @GetMapping
     public String getAvailableRoutes(Model model){
-        System.out.println("GET in RoutesClientController");
 
-        List<Ruta> ruti = this.rutaService.findAll();
+        List<Ruta> ruti = this.rutaService.findAllAvailable();
         model.addAttribute("ruti", ruti);
 
         return "listRoutes.html";
@@ -32,13 +35,10 @@ public class RoutesController {
 
     @GetMapping("/details/{id}")
     public String getRouteDetails(@PathVariable String id, Model model){
-        System.out.println("POST in /routes/details/{id}");
-
-        //selected route_id
-        System.out.println("Route_Id: " + id);
-
+        List<Kategorija> kategorii = this.kategorijaService.findAll();
         Ruta ruta = this.rutaService.findById(Integer.parseInt(id));
-        model.addAttribute("Ruta", ruta);
+        model.addAttribute("kategorii", kategorii);
+        model.addAttribute("ruta", ruta);
 
         return "routeDetails.html";
     }
