@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Routes</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-md">
+    <div class="container">
+        <!-- Navbar Brand -->
+        <a class="navbar-brand" href="/home">
+            <img th:src="@{img/logo.png}">
+        </a>
+
+        <!-- Navbar -->
+        <div class="collapsed navbar-collapse" id="navbarDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link">Компании</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/routes" class="nav-link">Рути</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Резервации</a>
+                </li>
+                <li class="nav-item nav-button">
+                    <a href="/login" class="nav-link">Најави се</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<th:block>
+
+    <div class="routes">
+        <div class="routes-box">
+            <div>
+                <h3 style="font-weight: bold"> Достапни рути.</h3>
+                <div class="row">
+                    <ul class="col-m">
+                        <li th:each="ruta : ${ruti}">
+
+                            <div class="">
+                                <p class="pp">Од <h4><th:block th:text="${ruta.zapocnuva_vo.getCityName()}"></th:block>
+                                </h4>
+                                </p>
+                            </div>
+
+                            <div>
+                                <img th:src="@{img/arrow.png}">
+                            </div>
+
+                            <div>
+                                <p class="pp">До <h4><th:block th:text="${ruta.zavrsuva_vo.getCityName()}"></th:block>
+                                </h4>
+                                </p>
+                            </div>
+
+                            <div>
+                                <p class="pp">Тргнува на <h4> <th:block th:text="${ruta.datum_poagjanje}"></th:block>
+                                </h4>
+                                </p>
+                            </div>
+
+                            <div>
+                                <p class="pp">Пристигнува на <h4> <th:block th:text="${ruta.datum_pristiganje}"></th:block>
+                                </h4>
+                                </p>
+                            </div>
+
+                            <a th:href="@{/routes/details/{id} (id=${ruta.ruta_id})}" class="btn btn-primary">Детали</a>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</th:block>
+
+
+<div class="footer">
+    <div class="container">
+        <p>© Сите права се задржани. 2023</p>
+    </div>
+</div>
+
+</body>
+</html>
