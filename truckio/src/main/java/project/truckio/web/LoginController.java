@@ -66,8 +66,10 @@ public class LoginController {
                 return "redirect:/companyRoutes";
             } else if(!dispecer.isEmpty()) {
                 request.getSession().setAttribute("role", "dispecer");
+                return "redirect:/dispatcher/routes";
             } else if(!vozac.isEmpty()) {
                 request.getSession().setAttribute("role", "vozac");
+                return "redirect:/driver/active-routes";
             }
 
             return "redirect:/home";

@@ -57,4 +57,10 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     public List<Rezervacija> finAllRezervaciiByCompany(Integer kompanija_id) {
         return rezervacijaRepository.findAllReservationsByCompany(kompanija_id);
     }
+
+    @Override
+    public List<Rezervacija> findByRuta(Integer ruta_id) {
+        return this.rezervacijaRepository.findByRuta(ruta_id);
+    }
+
 }

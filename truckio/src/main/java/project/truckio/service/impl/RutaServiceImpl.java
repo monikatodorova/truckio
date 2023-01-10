@@ -56,4 +56,14 @@ public class RutaServiceImpl implements RutaService {
     public List<Ruta> findAllAvailable() {
         return rutaRepository.findAllAvailable();
     }
+
+    @Override
+    public List<Ruta> findAllActiveByVozac(Integer vozac_id) {
+        return this.rutaRepository.findAllActiveByVozac(vozac_id);
+    }
+
+    @Override
+    public List<Ruta> findAllActiveByDispecer(Integer dispecer_id) {
+        return this.rutaRepository.findAllActiveByDispecer(dispecer_id);
+    }
 }
