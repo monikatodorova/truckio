@@ -120,10 +120,8 @@
               <p>Роба за транспорт</p>
               <ul>
                 <li th:each="roba : ${robaList}">
-                  <h4 th:if="${roba.getRoba_kolicina() == 1}" th:text="${roba.kategorija.getKategorija_ime()} + ' - количина: ' +
-                                     ${roba.getRoba_kolicina()} + ' тон'"></h4>
-                  <h4 th:if="${roba.getRoba_kolicina() != 1}" th:text="${roba.kategorija.getKategorija_ime()} + ' - количина: ' +
-                                     ${roba.getRoba_kolicina()} + ' тона'"></h4>
+                  <h4 th:if="${roba.getRoba_kolicina() == 1}" th:text="${roba.kategorija.getKategorija_ime()} + ' - количина: ' + ${roba.getRoba_kolicina()} + ' тон'"></h4>
+                  <h4 th:if="${roba.getRoba_kolicina() != 1}" th:text="${roba.kategorija.getKategorija_ime()} + ' - количина: ' + ${roba.getRoba_kolicina()} + ' тона'"></h4>
                 </li>
               </ul>
 

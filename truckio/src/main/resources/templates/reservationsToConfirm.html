@@ -49,59 +49,52 @@
             <h3>Резервации за одобрување</h3>
             <div th:each="rezervacija : ${rezervacii}">
                 <div class="reservation-box">
-                    <form class="form-signin mt-xl-5" method="post" action="/setActive">
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div>
-                                    <p>Започнува во</p>
-                                    <h4><th:block th:text="${rezervacija.ruta.zapocnuva_vo.getGrad_ime()}"></th:block></h4>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div>
+                                <p>Започнува во</p>
+                                <h4><th:block th:text="${rezervacija.ruta.zapocnuva_vo.getGrad_ime()}"></th:block></h4>
                             </div>
-                            <div class="col-md-3">
-                                <div>
-                                    <p>Завршува во</p>
-                                    <h4><th:block th:text="${rezervacija.ruta.zavrsuva_vo.getGrad_ime()}"></th:block></h4>
-                                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <p>Завршува во</p>
+                                <h4><th:block th:text="${rezervacija.ruta.zavrsuva_vo.getGrad_ime()}"></th:block></h4>
                             </div>
-                            <div class="col-md-3">
-                                <div>
-                                    <p>Тргнува на</p>
-                                    <h4><th:block th:text="${rezervacija.ruta.datum_poagjanje}"></th:block></h4>
-                                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <p>Тргнува на</p>
+                                <h4><th:block th:text="${rezervacija.ruta.datum_poagjanje}"></th:block></h4>
                             </div>
-                            <div class="col-md-3">
-                                <div>
-                                    <p>Пристигнува на</p>
-                                    <h4><th:block th:text="${rezervacija.ruta.datum_pristiganje}"></th:block></h4>
-                                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <p>Пристигнува на</p>
+                                <h4><th:block th:text="${rezervacija.ruta.datum_pristiganje}"></th:block></h4>
                             </div>
-                            <div class="col-md-3">
-                                <div>
-                                    <p>Клиент</p>
-                                    <h4><th:block th:text="${rezervacija.klient.getKlient_ime() + ' ' + rezervacija.klient.getKlient_prezime()}"></th:block></h4>
-                                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <p>Клиент</p>
+                                <h4><th:block th:text="${rezervacija.klient.getKlient_ime() + ' ' + rezervacija.klient.getKlient_prezime()}"></th:block></h4>
                             </div>
-                            <div class="col-md-3">
-                                <div>
-                                    <p>Клиент</p>
-                                    <h4><th:block th:text="${rezervacija.klient.getKlient_telefon()}"></th:block></h4>
-                                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <p>Телефон на клиент</p>
+                                <h4><th:block th:text="${rezervacija.klient.getKlient_telefon()}"></th:block></h4>
                             </div>
-
-                            <div class="col-md-3">
-                                <div>
-                                    <input type="hidden" name="rezervacija_id" th:value="${rezervacija.getRezervacija_id()}">
-                                    <input type="text" name="iznos" class="form-control" placeholder="Износ...">
-                                </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <div>
+                                <a th:href="@{/reservationsToConfirm/{id} (id=${rezervacija.getRezervacija_id()})}"
+                                   class="btn btn-primary btn-block" type="submit">Ажурирај</a>
                             </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">Означи активна</button>
-                            </div>
-
                         </div>
 
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

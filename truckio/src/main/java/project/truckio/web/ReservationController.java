@@ -67,7 +67,7 @@ public class ReservationController {
             for(int i=0; i<kategorii.length; i++) {
                 robaService.addRoba(Integer.parseInt(kolicini[i]), rezervacija.getRezervacija_id(), Integer.parseInt(kategorii[i]));
             }
-            return "/myReservations";
+            return "redirect:/reservations";
         }
 
         return "redirect:/routes/details/" + ruta_id + "/?error=capacityError";

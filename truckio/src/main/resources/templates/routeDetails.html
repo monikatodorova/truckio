@@ -105,7 +105,8 @@
               <div class="col-md-6">
                 <div>
                   <p>Преостанат капацитет на возило</p>
-                  <h4><th:block th:text="${preostanatKapacitet}"></th:block> тон</h4>
+                  <h4 th:if="${preostanatKapacitet == 1}" th:text="${preostanatKapacitet} + ' тон"></h4>
+                  <h4 th:if="${preostanatKapacitet != 1}" th:text="${preostanatKapacitet} + ' тона'"></h4>
                 </div>
               </div>
             </div>
