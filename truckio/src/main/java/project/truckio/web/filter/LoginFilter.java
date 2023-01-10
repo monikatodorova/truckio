@@ -29,7 +29,7 @@ public class LoginFilter implements Filter {
 
         String path = request.getServletPath();
 
-        if( !path.equals("/home") && !path.equals("/login") && !path.equals("/register") &&
+        if( !path.equals("/") && !path.equals("/home") && !path.equals("/login") && !path.equals("/register") &&
                 !path.startsWith("/webjars/") && !path.startsWith("/img/") && !path.startsWith("/css/style.css") &&
                 (klient==null && vraboten==null)) {
             response.sendRedirect("/login");
