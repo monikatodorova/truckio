@@ -31,7 +31,12 @@ public class RoutesController {
     }
 
     @GetMapping
-    public String getAvailableRoutes(Model model){
+    public String getAvailableRoutes(HttpServletRequest request, Model model){
+
+        String role = (String) request.getSession().getAttribute("role");
+        if(!role.equals("klient")) {
+            return "redirect:/notAuthorized";
+        }
 
         List<Ruta> ruti = this.rutaService.findAllAvailable();
         model.addAttribute("ruti", ruti);
@@ -40,8 +45,15 @@ public class RoutesController {
     }
 
     @GetMapping("/details/{id}")
-    public String getRouteDetails(@RequestParam(required = false) String error,
+    public String getRouteDetails(HttpServletRequest request,
+                                  @RequestParam(required = false) String error,
                                   @PathVariable String id, Model model){
+
+        String role = (String) request.getSession().getAttribute("role");
+        if(!role.equals("klient")) {
+            return "redirect:/notAuthorized";
+        }
+
         if(error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);

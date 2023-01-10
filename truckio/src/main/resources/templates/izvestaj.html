@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Routes</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-md">
+  <div class="container">
+    <!-- Navbar Brand -->
+    <a class="navbar-brand" href="/home">
+      <img th:src="@{/img/logo.png}">
+    </a>
+
+    <!-- Navbar -->
+    <div class="collapsed navbar-collapse" id="navbarDefault">
+      <ul class="navbar-nav ml-auto mr-auto">
+        <li class="nav-item">
+          <a href="/izvestaj" class="nav-link">Извештаи</a>
+        </li>
+        <li class="nav-item">
+          <a href="/companyRoutes" class="nav-link">Рути на компанија</a>
+        </li>
+        <li class="nav-item">
+          <a href="/reservationsToConfirm" class="nav-link">Резервации за одобрување</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="/logout" class="nav-link">Одјави се</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<th:block>
+
+  <div class="izvestaj">
+
+    <div class="container">
+      <h3>Генерален извештај</h3>
+      <div class="izvestaj-box">
+        <div class="row">
+
+          <div class="col-md-12">
+            <div>
+              <p>Компанија</p>
+              <h4><th:block th:text="${generalenIzvestaj.getKompanija_ime()}"></th:block></h4>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div>
+              <p>Вкупно вработени</p>
+              <h4><th:block th:text="${generalenIzvestaj.getBroj_vraboteni()}"></th:block></h4>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div>
+              <p>Вкупно клиенти</p>
+              <h4><th:block th:text="${generalenIzvestaj.getVkupno_klienti()}"></th:block></h4>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div>
+              <p>Вкупно резервации</p>
+              <h4><th:block th:text="${generalenIzvestaj.getVkupno_rezervacii()}"></th:block></h4>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div>
+              <p>Вкупно заработка</p>
+              <h4><th:block th:text="${generalenIzvestaj.getVkupna_zarabotka()}"></th:block></h4>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div>
+              <p>Активни резервации</p>
+              <h4><th:block th:text="${generalenIzvestaj.getVkupno_aktivni_rezervacii()}"></th:block></h4>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div>
+              <p>Завршени резервации</p>
+              <h4><th:block th:text="${generalenIzvestaj.getVkupno_zavrseni_rezervacii()}"></th:block></h4>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div>
+              <p>Резервации за одобрување</p>
+              <h4><th:block th:text="${generalenIzvestaj.getVkupno_za_odobruvanje_rezervacii()}"></th:block></h4>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div>
+              <p>Откажани резервации</p>
+              <h4><th:block th:text="${generalenIzvestaj.getVkupno_otkazani_rezervacii()}"></th:block></h4>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h3>Извештај за клиенти на компанијата и колку потрошиле во неа</h3>
+      <div class="izvestaj-box">
+        <div class="message" th:if="${kompaniiKlientiIzvestaj.isEmpty()}">
+          <h4>Нема клиенти кои направиле резервација.</h4>
+        </div>
+        <div th:each="kompaniiKlienti : ${kompaniiKlientiIzvestaj}">
+          <div class="row">
+
+            <div class="col-md-3">
+              <div>
+                <p>Име на клиент</p>
+                <h4><th:block th:text="${kompaniiKlienti.getKlient_ime()}"></th:block></h4>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div>
+                <p>Презиме на клиент</p>
+                <h4><th:block th:text="${kompaniiKlienti.getKlient_prezime()}"></th:block></h4>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div>
+                <p>Вкупна сума потрошено</p>
+                <h4><th:block th:text="${kompaniiKlienti.getSuma_fakturi()}"></th:block></h4>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div>
+                <p>Вкупно резервации</p>
+                <h4><th:block th:text="${kompaniiKlienti.getBroj_na_rezervacii()}"></th:block></h4>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h3>Извештај за број на завршени резервации на дадена релација во секоја година</h3>
+      <div class="izvestaj-box">
+        <div class="message" th:if="${relacijaRezervaciiIzvestaj.isEmpty()}">
+          <h4>Нема завршени резервации.</h4>
+        </div>
+        <div th:each="relacijaRezervacii : ${relacijaRezervaciiIzvestaj}">
+          <div class="row">
+
+            <div class="col-md-3">
+              <div>
+                <p>Почнува во</p>
+                <h4><th:block th:text="${relacijaRezervacii.getPocnuva_vo().getGrad_ime()}"></th:block></h4>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div>
+                <p>Почнува во</p>
+                <h4><th:block th:text="${relacijaRezervacii.getZavrsuva_vo().getGrad_ime()}"></th:block></h4>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div>
+                <p>Година</p>
+                <h4><th:block th:text="${relacijaRezervacii.getRelacijaRezervaciiID().getVo_godina()}"></th:block></h4>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div>
+                <p>Вкупно завршени резервации</p>
+                <h4><th:block th:text="${relacijaRezervacii.getBroj_zavrseni_rezervacii()}"></th:block></h4>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h3>За секоја релација приказ на број на активни или завршени резервации и вкупна заработка направена од тие резервации, во последните 30 дена</h3>
+      <div class="izvestaj-box">
+        <div class="message" th:if="${kompaniiRutiIzvestaj.isEmpty()}">
+          <h4>Нема активни или завршени резервации во последните 30 дена.</h4>
+        </div>
+        <div th:each="kompaniiRuti : ${kompaniiRutiIzvestaj}">
+          <div class="row">
+
+            <div class="col-md-3">
+              <div>
+                <p>Почнува во</p>
+                <h4><th:block th:text="${kompaniiRuti.getKompaniiRutiID().getRuta_pocnuva_vo()}"></th:block></h4>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div>
+                <p>Завршува во</p>
+                <h4><th:block th:text="${kompaniiRuti.getKompaniiRutiID().getRuta_zavrsuva_vo()}"></th:block></h4>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div>
+                <p>Број на активни или завршени резервации</p>
+                <h4><th:block th:text="${kompaniiRuti.getBroj_rezervacii()}"></th:block></h4>
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div>
+                <p>Вкупна заработка</p>
+                <h4><th:block th:text="${kompaniiRuti.getVkupna_zarabotka()}"></th:block></h4>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</th:block>
+
+
+<div class="footer">
+  <div class="container">
+    <p>© Сите права се задржани. 2023</p>
+  </div>
+</div>
+
+</body>
+</html>

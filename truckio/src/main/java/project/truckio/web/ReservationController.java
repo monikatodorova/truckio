@@ -4,10 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.truckio.model.*;
-import project.truckio.service.KategorijaService;
-import project.truckio.service.RezervacijaService;
-import project.truckio.service.RobaService;
-import project.truckio.service.RutaService;
+import project.truckio.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,13 +17,15 @@ public class ReservationController {
     private final RezervacijaService rezervacijaService;
     private final RobaService robaService;
     private final RutaService rutaService;
+    private final FakturaService fakturaService;
 
 
-    public ReservationController(KategorijaService kategorijaService, RezervacijaService rezervacijaService, RobaService robaService, RutaService rutaService) {
+    public ReservationController(KategorijaService kategorijaService, RezervacijaService rezervacijaService, RobaService robaService, RutaService rutaService, FakturaService fakturaService) {
         this.kategorijaService = kategorijaService;
         this.rezervacijaService = rezervacijaService;
         this.robaService = robaService;
         this.rutaService = rutaService;
+        this.fakturaService = fakturaService;
     }
 
     @PostMapping
@@ -34,6 +33,11 @@ public class ReservationController {
                                     @RequestParam String ruta_id,
                                     @RequestParam(value="kategorija[]", required = false) String[] kategorii,
                                     @RequestParam(value="kolicina[]", required = false) String[] kolicini) {
+
+        String role = (String) request.getSession().getAttribute("role");
+        if(!role.equals("klient")) {
+            return "redirect:/notAuthorized";
+        }
 
         if(kategorii == null) {
             return "redirect:/routes/details/" + ruta_id + "/?error=noCategorySelectedError";
@@ -61,7 +65,7 @@ public class ReservationController {
         }
 
         // ako ima kapacitet dodadi i prenasoci na moi rezervacii
-        if(vozilo.getVozilo_kapacitet() - vkupnoIskoristeno > vkupnoKolicini) {
+        if(vozilo.getVozilo_kapacitet() - vkupnoIskoristeno >= vkupnoKolicini) {
             Rezervacija rezervacija = rezervacijaService.addRezervacija("За одобрување", klient.getKlient_id(), Integer.valueOf(ruta_id));
             // roba za rezervacijata
             for(int i=0; i<kategorii.length; i++) {
@@ -76,6 +80,12 @@ public class ReservationController {
 
     @GetMapping
     public String getMyReservations(HttpServletRequest request, Model model){
+
+        String role = (String) request.getSession().getAttribute("role");
+        if(!role.equals("klient")) {
+            return "redirect:/notAuthorized";
+        }
+
         Klient klient = (Klient) request.getSession().getAttribute("klient");
         List<Rezervacija> rezervacii = this.rezervacijaService.findMyReservations(klient.getKlient_id());
         model.addAttribute("rezervacii", rezervacii);
@@ -85,9 +95,22 @@ public class ReservationController {
 
     @GetMapping("/details/{rezervacija_id}")
     public String getReservationDetails(@PathVariable String rezervacija_id, HttpServletRequest request, Model model){
+
+        String role = (String) request.getSession().getAttribute("role");
+        if(!role.equals("klient")) {
+            return "redirect:/notAuthorized";
+        }
+
         Klient klient = (Klient) request.getSession().getAttribute("klient");
         Rezervacija rezervacija = rezervacijaService.findById(Integer.valueOf(rezervacija_id));
         List<Roba> robaList = robaService.findRobaForReservation(Integer.valueOf(rezervacija_id));
+
+        String status = rezervacija.getRezervacija_status().toLowerCase();
+
+        if(status.equals("активна") || status.equals("завршена")) {
+            Faktura faktura = fakturaService.findFakturaByRezervacija(rezervacija);
+            model.addAttribute("faktura", faktura);
+        }
 
         model.addAttribute("rezervacija", rezervacija);
         model.addAttribute("robaList", robaList);

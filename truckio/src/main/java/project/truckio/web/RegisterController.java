@@ -34,7 +34,21 @@ public class RegisterController {
                            @RequestParam String password,
                            @RequestParam String repeatedPassword,
                            @RequestParam String email,
-                           @RequestParam String telefon) {
+                           @RequestParam String telefon,
+                           Model model) {
+
+        if(!email.contains("@") && !email.contains("@")) {
+            model.addAttribute("hasError", true);
+            model.addAttribute("error", "emailError");
+            return "register.html";
+        }
+
+        if(telefon.length()!=9 && telefon.startsWith("07")) {
+            model.addAttribute("hasError", true);
+            model.addAttribute("error", "telefonError");
+            return "register.html";
+        }
+
         try {
             this.klientService.register(ime, prezime, password, repeatedPassword, email, telefon);
             return "redirect:/login";

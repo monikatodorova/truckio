@@ -43,6 +43,7 @@ public class LoginController {
         Optional<Administrator> administrator = null;
         Optional<Dispecer> dispecer = null;
         Optional<Vozac> vozac = null;
+        request.getSession().setAttribute("role", "none");
 
         try{
             if(request.getParameter("role").equals("client")) {
