@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Route Status </title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-md">
+    <div class="container">
+        <!-- Navbar Brand -->
+        <a class="navbar-brand" href="/home">
+            <img th:src="@{/img/logo.png}">
+        </a>
+
+        <!-- Navbar -->
+        <div class="collapsed navbar-collapse" id="navbarDefault">
+            <ul class="navbar-nav ml-auto mr-auto">
+                <li class="nav-item">
+                    <a href="/dashboard" class="nav-link">Контролен панел</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/driver/active-routes" class="nav-link">Активни рути</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link">Одјави се</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<th:block>
+
+    <div class="reservation-to-confirm">
+
+        <div class="container">
+            <h3>Ажурирање на статус на резервација</h3>
+            <div class="reservation-box">
+                <form class="form-signin" method="post" action="/">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div>
+                                        <p>Започнува во</p>
+                                        <h4>
+                                            <th:block
+                                                    th:text="${rezervacija.ruta.zapocnuva_vo.getGrad_ime()}"></th:block>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <p>Завршува во</p>
+                                        <h4>
+                                            <th:block
+                                                    th:text="${rezervacija.ruta.zavrsuva_vo.getGrad_ime()}"></th:block>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <p>Тргнува на</p>
+                                        <h4>
+                                            <th:block th:text="${rezervacija.ruta.datum_poagjanje}"></th:block>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <p>Пристигнува на</p>
+                                        <h4>
+                                            <th:block th:text="${rezervacija.ruta.datum_pristiganje}"></th:block>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <p>Клиент</p>
+                                        <h4>
+                                            <th:block
+                                                    th:text="${rezervacija.klient.getKlient_ime() + ' ' + rezervacija.klient.getKlient_prezime()}"></th:block>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <p>Емаил на клиент</p>
+                                        <h4>
+                                            <th:block th:text="${rezervacija.klient.getEmail()}"></th:block>
+                                        </h4>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div>
+                                        <p>Возач</p>
+                                        <h4>
+                                            <th:block
+                                                    th:text="${rezervacija.ruta.vozac.vraboten.getVraboten_ime()}"></th:block>
+                                        </h4>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="12" style="margin: 0;">
+                                        <button class="btn btn-primary btn-block" type="submit">Означи како завршена</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6" style="padding-right: 5px;">
+                                    <div>
+                                        <input type="hidden" name="rezervacija_id"
+                                               th:value="${rezervacija.getRezervacija_id()}">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</th:block>
+
+
+<div class="footer">
+    <div class="container">
+        <p>© Сите права се задржани. 2023</p>
+    </div>
+</div>
+
+</body>
+</html>
