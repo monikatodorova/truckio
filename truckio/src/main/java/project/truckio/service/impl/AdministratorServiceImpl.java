@@ -8,6 +8,7 @@ import project.truckio.repository.VrabotenRepository;
 import project.truckio.service.AdministratorService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdministratorServiceImpl implements AdministratorService {
@@ -34,5 +35,10 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public List<Administrator> findAll() {
         return administratorRepository.findAll();
+    }
+
+    @Override
+    public Optional<Administrator> findRole(Integer administratorId) {
+        return administratorRepository.findById(administratorId);
     }
 }

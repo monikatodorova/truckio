@@ -9,6 +9,7 @@ import project.truckio.repository.VrabotenRepository;
 import project.truckio.service.DispecerService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DispecerServiceImpl implements DispecerService {
@@ -35,5 +36,15 @@ public class DispecerServiceImpl implements DispecerService {
     @Override
     public List<Dispecer> findAll() {
         return dispecerRepository.findAll();
+    }
+
+    @Override
+    public Optional<Dispecer> findRole(Integer dispecerId) {
+        return dispecerRepository.findById(dispecerId);
+    }
+
+    @Override
+    public List<Dispecer> findAllByCompany(Integer kompanijaId) {
+        return dispecerRepository.findAllByCompany(kompanijaId);
     }
 }

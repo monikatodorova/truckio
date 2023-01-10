@@ -9,4 +9,6 @@ public interface RobaService {
     Roba addRoba(Integer roba_kolicina, Integer rezervacijaId, Integer kategorijaId);
     Optional<Roba> findById(Integer robaId);
     List<Roba> findAll();
+
+    List<Roba> findRobaForReservation(Integer rezervacija_id);
 }

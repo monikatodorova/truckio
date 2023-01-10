@@ -7,7 +7,10 @@ import java.util.Optional;
 
 public interface RezervacijaService {
     Rezervacija addRezervacija(String rezervacija_status, Integer klientId, Integer rutaId);
-    Optional<Rezervacija> findById(Integer rezervacijaId);
+    Rezervacija findById(Integer rezervacijaId);
     List<Rezervacija> findAll();
     List<Rezervacija> findMyReservations(Integer klient_id);
+    List<Rezervacija> findReservationsForRoute(Integer ruta_id);
+    List<Rezervacija> finAllRezervaciiByCompany(Integer kompanija_id);
+
 }

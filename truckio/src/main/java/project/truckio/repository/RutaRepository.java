@@ -11,4 +11,8 @@ import java.util.List;
 public interface RutaRepository extends JpaRepository<Ruta, Integer>{
     @Query(value = "select * from project.ruti r where r.datum_poagjanje > now()", nativeQuery = true)
     public List<Ruta> findAllAvailable();
+
+    @Query(value = "select * from project.ruti r join project.vozila v on r.vozilo_id=v.vozilo_id " +
+            "where v.kompanija_id = :kompanija_id", nativeQuery = true)
+    public List<Ruta> findAllByCompany(Integer kompanija_id);
 }

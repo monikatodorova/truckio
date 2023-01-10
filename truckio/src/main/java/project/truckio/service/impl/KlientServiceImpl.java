@@ -43,7 +43,7 @@ public class KlientServiceImpl implements KlientService {
         if(email == null || email.isEmpty() || password==null || password.isEmpty()) {
             throw new InvalidArgumentException();
         }
-        return klientRepository.findByEmailAndPassword(email, CryptWithMD5.cryptWithMD5(password)).orElseThrow(InvalidUserCredentialsException::new);
+        return klientRepository.findByEmailAndPassword(email, CryptWithMD5.cryptWithMD5(password)).orElseThrow(InvalidUsernameOrPasswordException::new);
     }
 
     @Override

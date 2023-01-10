@@ -10,6 +10,7 @@ import project.truckio.repository.VrabotenRepository;
 import project.truckio.service.VozacService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VozacServiceImpl implements VozacService {
@@ -36,5 +37,10 @@ public class VozacServiceImpl implements VozacService {
     @Override
     public List<Vozac> findAll() {
         return vozacRepository.findAll();
+    }
+
+    @Override
+    public Optional<Vozac> findRole(Integer vozacId) {
+        return vozacRepository.findById(vozacId);
     }
 }
