@@ -11,4 +11,5 @@ public interface RutaService {
     Ruta findById(Integer rutaId);
     List<Ruta> findAll();
     List<Ruta> findAllAvailable();
+    List<Ruta> findActiveRoutesForVozac(Integer vozac_id);
 }

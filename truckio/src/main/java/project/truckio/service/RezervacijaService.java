@@ -1,6 +1,7 @@
 package project.truckio.service;
 
 import project.truckio.model.Rezervacija;
+import project.truckio.model.Ruta;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,4 +11,5 @@ public interface RezervacijaService {
     Optional<Rezervacija> findById(Integer rezervacijaId);
     List<Rezervacija> findAll();
     List<Rezervacija> findMyReservations(Integer klient_id);
+
 }
