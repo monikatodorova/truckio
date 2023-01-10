@@ -160,7 +160,7 @@ public class AdministratorController {
 
         Rezervacija rezervacija = rezervacijaService.findById(rezervacija_id);
 
-        if(status.equals("активна") && iznos == null) {
+        if(status.equals("Aктивна") && iznos == null) {
             List<Roba> robaList = robaService.findRobaForReservation(Integer.valueOf(rezervacija_id));
 
             model.addAttribute("rezervacija", rezervacija);
@@ -172,7 +172,7 @@ public class AdministratorController {
 
         rezervacija.setRezervacija_status(status);
 
-        if(status.equals("откажана")) {
+        if(status.equals("Oткажана")) {
             System.out.println("STATUS SET");
             System.out.println(rezervacija.getRezervacija_status());
             return "redirect:/reservationsToConfirm";

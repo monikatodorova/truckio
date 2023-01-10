@@ -75,6 +75,42 @@
                 </ul>
             </div>
 
+            <!-- Navbar -->
+            <div class="collapsed navbar-collapse" th:if="${session.role.equals('dispecer')}">
+                <ul class="navbar-nav ml-auto mr-auto">
+                    <li class="nav-item">
+                        <a href="/home" class="nav-link">Почетна</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/dispatcher/activeRoutes" class="nav-link">Активни рути</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">Одјави се</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Navbar -->
+            <div class="collapsed navbar-collapse" th:if="${session.role.equals('vozac')}">
+                <ul class="navbar-nav ml-auto mr-auto">
+                    <li class="nav-item">
+                        <a href="/home" class="nav-link">Почетна</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/driver/active-routes" class="nav-link">Активни рути</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">Одјави се</a>
+                    </li>
+                </ul>
+            </div>
+
 
         </div>
     </nav>

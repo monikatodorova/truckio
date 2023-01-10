@@ -12,5 +12,6 @@ public interface RezervacijaService {
     List<Rezervacija> findMyReservations(Integer klient_id);
     List<Rezervacija> findReservationsForRoute(Integer ruta_id);
     List<Rezervacija> finAllRezervaciiByCompany(Integer kompanija_id);
+    List<Rezervacija> findByRuta(Integer ruta_id);
 
 }

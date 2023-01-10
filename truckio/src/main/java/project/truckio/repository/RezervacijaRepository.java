@@ -21,4 +21,9 @@ public interface RezervacijaRepository extends JpaRepository<Rezervacija, Intege
             "join project.vozila v on ruti.vozilo_id = v.vozilo_id " +
             "where lower(r.rezervacija_status) LIKE 'за одобрување' and v.kompanija_id = :kompanija_id", nativeQuery = true)
     List<Rezervacija> findAllReservationsByCompany(Integer kompanija_id);
+
+    @Query(value = "select * from project.rezervacii r " +
+            " where lower(r.rezervacija_status) LIKE 'активна' " +
+            " and   r.ruta_id = :ruta_id ", nativeQuery = true)
+    List<Rezervacija> findByRuta(Integer ruta_id);
 }
