@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Routes</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-md">
+  <div class="container">
+    <!-- Navbar Brand -->
+    <a class="navbar-brand" href="/home">
+      <img th:src="@{/img/logo.png}">
+    </a>
+
+    <!-- Navbar -->
+    <div class="collapsed navbar-collapse" id="navbarDefault">
+      <ul class="navbar-nav ml-auto mr-auto">
+        <li class="nav-item">
+          <a href="/home" class="nav-link">Почетна</a>
+        </li>
+        <li class="nav-item">
+          <a href="/driver/active-routes" class="nav-link">Активни рути</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="/logout" class="nav-link">Одјави се</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<th:block>
+
+  <div class="driver-route-details">
+
+    <div class="container">
+      <h3>Детали за рута</h3>
+      <div class="route-box">
+        <div class="row">
+
+          <div class="col-md-6">
+            <div class="row">
+
+              <div class="col-md-6">
+                <div>
+                  <p>Од</p>
+                  <h4><th:block th:text="${ruta.zapocnuva_vo.getGrad_ime()}"></th:block></h4>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <p>До</p>
+                  <h4><th:block th:text="${ruta.zavrsuva_vo.getGrad_ime()}"></th:block></h4>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <p>Тргнува на</p>
+                  <h4><th:block th:text="${ruta.datum_poagjanje}"></th:block></h4>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <p>Пристигнува на</p>
+                  <h4><th:block th:text="${ruta.datum_pristiganje}"></th:block></h4>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <p>Тип на возило</p>
+                  <h4><th:block th:text="${ruta.vozilo.tip.getTip_ime()}"></th:block></h4>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <p>Марка на возило</p>
+                  <h4><th:block th:text="${ruta.vozilo.getVozilo_marka()}"></th:block></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="row">
+
+              <div class="col-md-12">
+                <p>Роба за транспорт</p>
+                <ul>
+                  <li th:each="roba : ${robaList}">
+                    <h4 th:if="${roba.getRoba_kolicina() == 1}" th:text="${roba.kategorija.getKategorija_ime()} + ' - количина: ' +
+                                     ${roba.getRoba_kolicina()} + ' тон'"></h4>
+                    <h4 th:if="${roba.getRoba_kolicina() != 1}" th:text="${roba.kategorija.getKategorija_ime()} + ' - количина: ' +
+                                     ${roba.getRoba_kolicina()} + ' тона'"></h4>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-12" style="margin: 0;">
+            <a class="btn btn-primary btn-block" href="/driver/active-routes">Назад</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</th:block>
+
+<div class="footer">
+  <div class="container">
+    <p>© Сите права се задржани. 2023</p>
+  </div>
+</div>

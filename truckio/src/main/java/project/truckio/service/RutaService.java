@@ -12,4 +12,6 @@ public interface RutaService {
     List<Ruta> findAll();
     List<Ruta> findAllByCompany(Integer kompanijaId);
     List<Ruta> findAllAvailable();
+    List<Ruta> findAllActiveByVozac(Integer vozac_id);
+    List<Ruta> findAllActiveByDispecer(Integer dispecer_id);
 }

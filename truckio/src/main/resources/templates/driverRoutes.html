@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Driver's Routes</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-md">
+  <div class="container">
+    <!-- Navbar Brand -->
+    <a class="navbar-brand" href="/home">
+      <img th:src="@{/img/logo.png}">
+    </a>
+
+    <!-- Navbar -->
+    <div class="collapsed navbar-collapse" id="navbarDefault">
+      <ul class="navbar-nav ml-auto mr-auto">
+        <li class="nav-item">
+          <a href="/home" class="nav-link">Почетна</a>
+        </li>
+        <li class="nav-item">
+          <a href="/driver/active-routes" class="nav-link">Активни рути</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="/logout" class="nav-link">Одјави се</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<th:block>
+
+  <div class="driver-routes">
+
+    <div class="container">
+      <h3>Активни рути</h3>
+      <div th:each="ruta : ${ruti}">
+        <div class="driver-route-box">
+          <div class="row">
+            <div class="col-md-2">
+              <div>
+                <p>Започнува во</p>
+                <h4><th:block th:text="${ruta.zapocnuva_vo.getGrad_ime()}"></th:block></h4>
+              </div>
+            </div>
+            <div class="col-md-1">
+              <img th:src="@{/img/arrow.png}">
+            </div>
+            <div class="col-md-2">
+              <div>
+                <p>Завршува во</p>
+                <h4><th:block th:text="${ruta.zavrsuva_vo.getGrad_ime()}"></th:block></h4>
+              </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-2">
+              <div>
+                <p>Тргнува на</p>
+                <h4><th:block th:text="${ruta.datum_poagjanje}"></th:block></h4>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div>
+                <p>Пристигнува на</p>
+                <h4><th:block th:text="${ruta.datum_pristiganje}"></th:block></h4>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a th:href="@{/driver/route-details/{id} (id=${ruta.ruta_id})}" class="btn btn-primary">Детали</a>
+            </div>
+            <input type="hidden" id="ruta_id" name="ruta_id" th:value="${ruta.ruta_id}">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</th:block>
+
+
+<div class="footer">
+  <div class="container">
+    <p>© Сите права се задржани. 2023</p>
+  </div>
+</div>
+
+</body>
+</html>
