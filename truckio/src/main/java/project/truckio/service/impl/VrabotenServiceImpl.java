@@ -1,8 +1,13 @@
 package project.truckio.service.impl;
 
 import org.springframework.stereotype.Service;
+import project.truckio.model.Klient;
 import project.truckio.model.Kompanija;
 import project.truckio.model.Vraboten;
+import project.truckio.model.exceptions.InvalidArgumentException;
+import project.truckio.model.exceptions.InvalidUserCredentialsException;
+import project.truckio.model.exceptions.InvalidUsernameOrPasswordException;
+import project.truckio.model.passwordencrypt.CryptWithMD5;
 import project.truckio.repository.KompanijaRepository;
 import project.truckio.repository.VrabotenRepository;
 import project.truckio.service.VrabotenService;
@@ -36,5 +41,13 @@ public class VrabotenServiceImpl implements VrabotenService {
     @Override
     public List<Vraboten> listAll() {
         return vrabotenRepository.findAll();
+    }
+
+    @Override
+    public Vraboten login(String email, String password) {
+        if(email == null || email.isEmpty() || password==null || password.isEmpty()) {
+            throw new InvalidArgumentException();
+        }
+        return vrabotenRepository.findByEmailAndPassword(email, CryptWithMD5.cryptWithMD5(password)).orElseThrow(InvalidUsernameOrPasswordException::new);
     }
 }

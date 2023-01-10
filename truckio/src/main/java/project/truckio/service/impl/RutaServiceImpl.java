@@ -48,6 +48,11 @@ public class RutaServiceImpl implements RutaService {
     }
 
     @Override
+    public List<Ruta> findAllByCompany(Integer kompanijaId) {
+        return rutaRepository.findAllByCompany(kompanijaId);
+    }
+
+    @Override
     public List<Ruta> findAllAvailable() {
         return rutaRepository.findAllAvailable();
     }

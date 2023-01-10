@@ -43,4 +43,9 @@ public class RobaServiceImpl implements RobaService {
     public List<Roba> findAll() {
         return robaRepository.findAll();
     }
+
+    @Override
+    public List<Roba> findRobaForReservation(Integer rezervacija_id) {
+        return robaRepository.findRobaForReservation(rezervacija_id);
+    }
 }

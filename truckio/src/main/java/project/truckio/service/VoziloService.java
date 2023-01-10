@@ -9,4 +9,5 @@ public interface VoziloService {
     Vozilo registerVozilo(String vozilo_marka, Integer vozilo_kapacitet, Integer kompanijaId, Integer tipId, Integer vozacId);
     Optional<Vozilo> findById(Integer voziloId);
     List<Vozilo> findAll();
+    List<Vozilo> findAllByCompany(Integer kompanijaId);
 }

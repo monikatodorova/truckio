@@ -34,8 +34,8 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     }
 
     @Override
-    public Optional<Rezervacija> findById(Integer rezervacijaId) {
-        return rezervacijaRepository.findById(rezervacijaId);
+    public Rezervacija findById(Integer rezervacijaId) {
+        return rezervacijaRepository.findById(rezervacijaId).get();
     }
 
     @Override
@@ -46,5 +46,15 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     @Override
     public List<Rezervacija> findMyReservations(Integer klient_id) {
         return rezervacijaRepository.findMyReservations(klient_id);
+    }
+
+    @Override
+    public List<Rezervacija> findReservationsForRoute(Integer ruta_id) {
+        return rezervacijaRepository.findReservationsForRoute(ruta_id);
+    }
+
+    @Override
+    public List<Rezervacija> finAllRezervaciiByCompany(Integer kompanija_id) {
+        return rezervacijaRepository.findAllReservationsByCompany(kompanija_id);
     }
 }

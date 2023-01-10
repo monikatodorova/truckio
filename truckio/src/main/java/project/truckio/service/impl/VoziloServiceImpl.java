@@ -47,4 +47,9 @@ public class VoziloServiceImpl implements VoziloService {
     public List<Vozilo> findAll() {
         return voziloRepository.findAll();
     }
+
+    @Override
+    public List<Vozilo> findAllByCompany(Integer kompanijaId) {
+        return voziloRepository.findAllByCompany(kompanijaId);
+    }
 }

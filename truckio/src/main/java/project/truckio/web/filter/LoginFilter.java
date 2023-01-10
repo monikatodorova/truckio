@@ -2,6 +2,7 @@ package project.truckio.web.filter;
 
 import org.springframework.context.annotation.Profile;
 import project.truckio.model.Klient;
+import project.truckio.model.Vraboten;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -23,11 +24,14 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        Klient user = (Klient) request.getSession().getAttribute("klient");
+        Klient klient = (Klient) request.getSession().getAttribute("klient");
+        Vraboten vraboten = (Vraboten) request.getSession().getAttribute("vraboten");
 
         String path = request.getServletPath();
 
-        if( !"/login".equals(path) && !"/register".equals(path) && !"/resources/**".equals(path) && !"/css/style.css".equals(path) && user==null) {
+        if( !path.equals("/home") && !path.equals("/login") && !path.equals("/register") &&
+                !path.startsWith("/webjars/") && !path.startsWith("/img/") && !path.startsWith("/css/style.css") &&
+                (klient==null && vraboten==null)) {
             response.sendRedirect("/login");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);

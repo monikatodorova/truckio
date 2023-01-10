@@ -10,5 +10,6 @@ public interface RutaService {
     Ruta addRuta(LocalDate datum_poagjanje, LocalDate datum_pristiganje, Integer zapocnuvaVoId, Integer zavrsuvaVoId, Integer voziloId, Integer dispecerId, Integer vozacId);
     Ruta findById(Integer rutaId);
     List<Ruta> findAll();
+    List<Ruta> findAllByCompany(Integer kompanijaId);
     List<Ruta> findAllAvailable();
 }

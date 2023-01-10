@@ -19,17 +19,9 @@
         <!-- Navbar -->
         <div class="collapsed navbar-collapse" id="navbarDefault">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link">Компании</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/routes" class="nav-link">Рути</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/reservations" class="nav-link">Мои Резервации</a>
-                </li>
                 <li class="nav-item nav-button">
-                    <a href="/login" class="nav-link">Најави се</a>
+                    <a class="nav-link asClient show" data-action="loginAsEmployee">Најави се како вработен</a>
+                    <a class="nav-link asEmployee hide" data-action="loginAsClient">Најави се како клиент</a>
                 </li>
             </ul>
         </div>
@@ -42,23 +34,48 @@
     <div class="login">
         <div class="container">
 
-            <div class="form-box">
-                <form class="form-signin mt-xl-5" method="post" action="/login">
-                    <h3>Најави се</h3>
-                    <p>Внеси ги податоците за да продолжиш.</p>
-                    <div th:text="${param.error}" class="text-danger"></div>
-                    <p>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="Емаил" required=""
-                               autofocus="">
-                    </p>
-                    <p>
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Лозинка"
-                               required="">
-                    </p>
-                    <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Најави се</button>
-                </form>
-                <p style="text-align: center;">Немате креирано профил?
-                    <a href="/register">Регистрирај се!</a></p>
+            <div class="asClient show">
+                <div class="form-box">
+                    <form class="form-signin mt-xl-5" method="post" action="/login">
+                        <h3>Најави се како клиент</h3>
+
+                        <div th:if="${hasError == true}" th:text="${error}" class="text-danger"></div>
+                        <p th:if="${hasError == false}">Внеси ги податоците за да продолжиш.</p>
+                        <input type="hidden" name="role" value="client">
+                        <p>
+                            <input type="text" id="emailClient" name="email" class="form-control" placeholder="Емаил" required=""
+                                   autofocus="">
+                        </p>
+                        <p>
+                            <input type="password" id="passwordClient" name="password" class="form-control" placeholder="Лозинка"
+                                   required="">
+                        </p>
+                        <button id="submitClient" class="btn btn-lg btn-primary btn-block" type="submit">Најави се</button>
+                    </form>
+                    <p style="text-align: center;">Немате креирано профил?
+                        <a href="/register">Регистрирај се!</a></p>
+                </div>
+            </div>
+
+            <div class="asEmployee hide">
+                <div class="form-box">
+                    <form class="form-signin mt-xl-5" method="post" action="/login">
+                        <h3>Најави се како вработен</h3>
+
+                        <div th:if="${hasError == true}" th:text="${error}" class="text-danger"></div>
+                        <p th:if="${hasError == false}">Внеси ги податоците за да продолжиш.</p>
+                        <input type="hidden" name="role" value="employee">
+                        <p>
+                            <input type="text" id="email" name="email" class="form-control" placeholder="Емаил" required=""
+                                   autofocus="">
+                        </p>
+                        <p>
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Лозинка"
+                                   required="">
+                        </p>
+                        <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Најави се</button>
+                    </form>
+                </div>
             </div>
 
         </div>
@@ -72,6 +89,36 @@
         <p>© Сите права се задржани. 2023</p>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+
+        // On button click
+        let entries = 1;
+        $('[data-action="loginAsEmployee"]').click(function (e) {
+            e.preventDefault();
+
+            $(".asClient").removeClass("show");
+            $(".asClient").addClass("hide");
+
+            $(".asEmployee").removeClass("hide");
+            $(".asEmployee").addClass("show");
+
+        });
+
+        $('[data-action="loginAsClient"]').click(function (e) {
+            e.preventDefault();
+
+            $(".asClient").removeClass("hide");
+            $(".asClient").addClass("show");
+
+            $(".asEmployee").removeClass("show");
+            $(".asEmployee").addClass("hide");
+
+        });
+
+    })
+</script>
 
 </body>
 </html>

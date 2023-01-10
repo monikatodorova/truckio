@@ -20,10 +20,10 @@ public class Vraboten {
     private String vraboten_prezime;
 
     @Column(name = "vraboten_email", nullable = false, length = 300)
-    private String vraboten_email;
+    private String email;
 
     @Column(name = "vraboten_password", nullable = false, length = 300)
-    private String vraboten_password;
+    private String password;
 
     // vrska so kompanija
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,8 +33,8 @@ public class Vraboten {
     public Vraboten(String vraboten_ime, String vraboten_prezime, String vraboten_email, String vraboten_password, Kompanija kompanija) {
         this.vraboten_ime = vraboten_ime;
         this.vraboten_prezime = vraboten_prezime;
-        this.vraboten_email = vraboten_email;
-        this.vraboten_password = vraboten_password;
+        this.email = vraboten_email;
+        this.password = vraboten_password;
         this.kompanija = kompanija;
     }
 

@@ -19,9 +19,9 @@
 
     <!-- Navbar -->
     <div class="collapsed navbar-collapse" id="navbarDefault">
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto mr-auto">
         <li class="nav-item">
-          <a class="nav-link">Компании</a>
+          <a href="/dashboard" class="nav-link">Контролен панел</a>
         </li>
         <li class="nav-item">
           <a href="/routes" class="nav-link">Рути</a>
@@ -29,7 +29,9 @@
         <li class="nav-item">
           <a href="/reservations" class="nav-link">Мои Резервации</a>
         </li>
-        <li class="nav-item nav-button">
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
           <a href="/logout" class="nav-link">Одјави се</a>
         </li>
       </ul>
@@ -54,16 +56,11 @@
                 <h4><th:block th:text="${rezervacija.ruta.zapocnuva_vo.getGrad_ime()}"></th:block></h4>
               </div>
             </div>
-            <div class="col-md-1">
-              <img th:src="@{img/arrow.png}">
-            </div>
             <div class="col-md-2">
               <div>
                 <p>Завршува во</p>
                 <h4><th:block th:text="${rezervacija.ruta.zavrsuva_vo.getGrad_ime()}"></th:block></h4>
               </div>
-            </div>
-            <div class="col-md-1">
             </div>
             <div class="col-md-2">
               <div>
@@ -79,9 +76,12 @@
             </div>
             <div class="col-md-2">
               <div>
-                <p>Статус на резервација</p>
+                <p>Статус</p>
                 <h4><th:block th:text="${rezervacija.getRezervacija_status()}"></th:block></h4>
               </div>
+            </div>
+            <div class="col-md-2" style="justify-content: center;">
+              <a th:href="'/reservations/details/' + ${rezervacija.getRezervacija_id()}" class="btn btn-primary">Детали</a>
             </div>
           </div>
         </div>
