@@ -21,7 +21,7 @@
     <div class="collapsed navbar-collapse" id="navbarDefault">
       <ul class="navbar-nav ml-auto mr-auto">
         <li class="nav-item">
-          <a href="/dashboard" class="nav-link">Контролен панел</a>
+          <a href="/izvestaj" class="nav-link">Извештаи</a>
         </li>
         <li class="nav-item">
           <a href="/companyRoutes" class="nav-link">Рути на компанија</a>
@@ -128,8 +128,8 @@
                 </div>
                 <div class="col-md-6" style="padding-left: 5px;">
                   <div>
-                    <select name="status" id="status" class="form-control">
-                      <option value="none" selected disabled hidden>Статус</option>
+                    <select name="status" id="status" class="form-control" required="">
+                      <option value="" selected disabled hidden>Статус</option>
                       <option value="активна">Активна</option>
                       <option value="откажана">Откажана</option>
                     </select>

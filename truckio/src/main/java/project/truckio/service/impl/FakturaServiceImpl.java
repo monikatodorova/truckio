@@ -42,4 +42,9 @@ public class FakturaServiceImpl implements FakturaService {
     public List<Faktura> findAll() {
         return fakturaRepository.findAll();
     }
+
+    @Override
+    public Faktura findFakturaByRezervacija(Rezervacija rezervacija) {
+        return fakturaRepository.findFakturaByRezervacija(rezervacija);
+    }
 }

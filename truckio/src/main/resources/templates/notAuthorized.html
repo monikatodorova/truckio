@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home page</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+  <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+<nav class="navbar navbar-expand-md" th:if="${session.role == null}">
+  <div class="container">
+    <!-- Navbar Brand -->
+    <a class="navbar-brand" href="/home">
+      <img th:src="@{img/logo.png}">
+    </a>
+
+    <!-- Navbar -->
+    <div class="collapsed navbar-collapse" id="navbarDefault">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item nav-button">
+          <a href="/login" class="nav-link">Најави се</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-md" th:if="${session.role != null}">
+
+  <div class="container">
+    <!-- Navbar Brand -->
+    <a class="navbar-brand" href="/home">
+      <img th:src="@{/img/logo.png}">
+    </a>
+
+    <!-- Navbar -->
+    <div class="collapsed navbar-collapse" th:if="${session.role.equals('klient')}">
+      <ul class="navbar-nav ml-auto mr-auto">
+        <li class="nav-item">
+          <a href="/routes" class="nav-link">Рути</a>
+        </li>
+        <li class="nav-item">
+          <a href="/reservations" class="nav-link">Мои Резервации</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="/logout" class="nav-link">Одјави се</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Navbar -->
+    <div class="collapsed navbar-collapse" th:if="${session.role.equals('administrator')}">
+      <ul class="navbar-nav ml-auto mr-auto">
+        <li class="nav-item">
+          <a href="/izvestaj" class="nav-link">Извештаи</a>
+        </li>
+        <li class="nav-item">
+          <a href="/companyRoutes" class="nav-link">Рути на компанија</a>
+        </li>
+        <li class="nav-item">
+          <a href="/reservationsToConfirm" class="nav-link">Резервации за одобрување</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="/logout" class="nav-link">Одјави се</a>
+        </li>
+      </ul>
+    </div>
+
+
+  </div>
+</nav>
+
+<th:block>
+
+  <div class="notAuthorized">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div style="text-align: center;">
+            <h3>Не сте авторизиран за пристап до оваа страна.</h3>
+            <a th:href="@{/home}" class="btn btn-primary" style="padding: 10px 100px;">Врати се на почетна</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</th:block>
+
+
+<div class="footer">
+  <div class="container">
+    <p>© Сите права се задржани. 2023</p>
+  </div>
+</div>
+
+</body>
+</html>

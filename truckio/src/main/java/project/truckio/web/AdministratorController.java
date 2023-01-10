@@ -39,6 +39,11 @@ public class AdministratorController {
     @GetMapping({"/companyRoutes"})
     public String getCompanyRoutes(HttpServletRequest request, Model model){
 
+        String role = (String) request.getSession().getAttribute("role");
+        if(!role.equals("administrator")) {
+            return "redirect:/notAuthorized";
+        }
+
         Kompanija kompanija = (Kompanija) request.getSession().getAttribute("kompanija");
         List<Ruta> ruti = this.rutaService.findAllByCompany(kompanija.getKompanija_id());
         model.addAttribute("ruti", ruti);
@@ -49,6 +54,11 @@ public class AdministratorController {
     // ADD NEW ROUTE
     @GetMapping({"/addRoute"})
     public String getAddRoutePage(HttpServletRequest request, Model model){
+
+        String role = (String) request.getSession().getAttribute("role");
+        if(!role.equals("administrator")) {
+            return "redirect:/notAuthorized";
+        }
 
         Kompanija kompanija = (Kompanija) request.getSession().getAttribute("kompanija");
         List<Vozilo> vozila = this.voziloService.findAllByCompany(kompanija.getKompanija_id());
@@ -63,15 +73,35 @@ public class AdministratorController {
     }
 
     @PostMapping({"/addRoute"})
-    public String addRuta(@RequestParam Integer zapocnuva_vo,
+    public String addRuta(HttpServletRequest request,
+                           @RequestParam Integer zapocnuva_vo,
                            @RequestParam Integer zavrsuva_vo,
                            @RequestParam String datum_trgnuvanje,
                            @RequestParam String datum_pristignuvanje,
                            @RequestParam Integer dispecer,
-                           @RequestParam Integer vozilo_id) {
+                           @RequestParam Integer vozilo_id,
+                           Model model) {
+
+        String role = (String) request.getSession().getAttribute("role");
+        if(!role.equals("administrator")) {
+            return "redirect:/notAuthorized";
+        }
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate trgnuva = LocalDate.parse(datum_trgnuvanje, formatter);
         LocalDate pristignuva = LocalDate.parse(datum_pristignuvanje, formatter);
+
+        if(trgnuva.isAfter(pristignuva)){
+            model.addAttribute("hasError", true);
+            model.addAttribute("error", "trgnuvaIsAfterPristignuva");
+            return "addRoute.html";
+        }
+
+        if(trgnuva.isBefore(LocalDate.now())){
+            model.addAttribute("hasError", true);
+            model.addAttribute("error", "trgnuvaIsBeforeToday");
+            return "addRoute.html";
+        }
 
         Vozilo vozilo = voziloService.findById(vozilo_id).get();
         this.rutaService.addRuta(trgnuva, pristignuva, zapocnuva_vo, zavrsuva_vo, vozilo_id, dispecer, vozilo.getVozac().getVozac_id());
@@ -82,6 +112,11 @@ public class AdministratorController {
     // RESERVATION TO CONFIRM
     @GetMapping({"/reservationsToConfirm"})
     public String getReservationsToConfirmPage(HttpServletRequest request, Model model) {
+
+        String role = (String) request.getSession().getAttribute("role");
+        if(!role.equals("administrator")) {
+            return "redirect:/notAuthorized";
+        }
 
         Kompanija kompanija = (Kompanija) request.getSession().getAttribute("kompanija");
         List<Rezervacija> rezervacii = rezervacijaService.finAllRezervaciiByCompany(kompanija.getKompanija_id());
@@ -95,6 +130,11 @@ public class AdministratorController {
     public String getReservationToConfirmPage(HttpServletRequest request,
                                               @RequestParam(required = false) String error,
                                               @PathVariable String id, Model model) {
+
+        String role = (String) request.getSession().getAttribute("role");
+        if(!role.equals("administrator")) {
+            return "redirect:/notAuthorized";
+        }
 
         Kompanija kompanija = (Kompanija) request.getSession().getAttribute("kompanija");
         Rezervacija rezervacija = rezervacijaService.findById(Integer.valueOf(id));
@@ -112,6 +152,12 @@ public class AdministratorController {
                             @RequestParam(required = false) Integer iznos,
                             @RequestParam String status,
                             Model model) {
+
+        String role = (String) request.getSession().getAttribute("role");
+        if(!role.equals("administrator")) {
+            return "redirect:/notAuthorized";
+        }
+
         Rezervacija rezervacija = rezervacijaService.findById(rezervacija_id);
 
         if(status.equals("активна") && iznos == null) {

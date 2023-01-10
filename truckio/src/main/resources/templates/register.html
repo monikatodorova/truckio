@@ -37,6 +37,15 @@
               <div th:text="${param.error}" class="text-danger"></div>
 
               <div class="row">
+                <div class="col-md-12" th:if="${hasError == true && error.equals('emailError')}">
+                  <p class="text-danger">Форматот на емаил не е во ред.</p>
+                </div>
+                <div class="col-md-12" th:if="${hasError == true && error.equals('telefonError')}">
+                  <p class="text-danger">Форматот на телефон не е во ред. Внесете го бројот во формат 07XXXXXXX.</p>
+                </div>
+              </div>
+
+              <div class="row">
 
                 <div class="col-md-6">
                   <p>

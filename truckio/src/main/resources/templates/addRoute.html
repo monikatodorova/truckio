@@ -20,10 +20,13 @@
     <div class="collapsed navbar-collapse" id="navbarDefault">
       <ul class="navbar-nav ml-auto mr-auto">
         <li class="nav-item">
-          <a href="/dashboard" class="nav-link">Контролен панел</a>
+          <a href="/izvestaj" class="nav-link">Извештаи</a>
         </li>
         <li class="nav-item">
           <a href="/companyRoutes" class="nav-link">Рути на компанија</a>
+        </li>
+        <li class="nav-item">
+          <a href="/reservationsToConfirm" class="nav-link">Резервации за одобрување</a>
         </li>
       </ul>
 
@@ -46,10 +49,18 @@
           <h3>Додај нова рута</h3>
 
           <div class="row">
+            <div class="col-md-12" th:if="${hasError == true && error.equals('trgnuvaIsAfterPristignuva')}">
+              <p class="text-danger">Датумот на тргнување мора или да биде пред датумот на пристигање, или да се совпаѓаат.</p>
+            </div>
+            <div class="col-md-12" th:if="${hasError == true && error.equals('trgnuvaIsBeforeToday')}">
+              <p class="text-danger">Датумот на тргнување мора да биде после денешниот датум.</p>
+            </div>
+          </div>
 
+          <div class="row">
             <div class="col-md-6">
-              <select name="zapocnuva_vo" id="zapocnuva_vo" class="form-control">
-                <option value="none" selected disabled hidden>Од</option>
+              <select name="zapocnuva_vo" id="zapocnuva_vo" class="form-control" required="">
+                <option value="" selected disabled hidden>Од</option>
                 <option
                         th:each="grad : ${gradovi}"
                         th:text="${grad.getGrad_ime()}"
@@ -59,8 +70,8 @@
             </div>
 
             <div class="col-md-6">
-              <select name="zavrsuva_vo" id="zavrsuva_vo" class="form-control">
-                <option value="none" selected disabled hidden>До</option>
+              <select name="zavrsuva_vo" id="zavrsuva_vo" class="form-control" required="">
+                <option value="" selected disabled hidden>До</option>
                 <option
                         th:each="grad : ${gradovi}"
                         th:text="${grad.getGrad_ime()}"
@@ -70,18 +81,18 @@
             </div>
 
             <div class="col-md-6">
-              <option value="none" selected disabled hidden>Тргнува на</option>
-              <input type="date" class="form-control" name="datum_trgnuvanje">
+              <option value="" selected disabled hidden>Тргнува на</option>
+              <input type="date" class="form-control" name="datum_trgnuvanje" required="">
             </div>
 
             <div class="col-md-6">
-              <option value="none" selected disabled hidden>Пристигнува на</option>
-              <input type="date" class="form-control" name="datum_pristignuvanje">
+              <option value="" selected disabled hidden>Пристигнува на</option>
+              <input type="date" class="form-control" name="datum_pristignuvanje" required="">
             </div>
 
             <div class="col-md-12">
-              <select name="dispecer" id="dispecer" class="form-control">
-                <option value="none" selected disabled hidden>Диспечер</option>
+              <select name="dispecer" id="dispecer" class="form-control" required="">
+                <option value="" selected disabled hidden>Диспечер</option>
                 <option
                         th:each="dispecer : ${dispeceri}"
                         th:text="${dispecer.vraboten.getVraboten_ime()}"
@@ -91,8 +102,8 @@
             </div>
 
             <div class="col-md-12">
-              <select name="vozilo_id" id="vozilo" class="form-control">
-                <option value="none" selected disabled hidden>Возило</option>
+              <select name="vozilo_id" id="vozilo" class="form-control" required="">
+                <option value="" selected disabled hidden>Возило</option>
                 <option
                         th:each="vozilo : ${vozila}"
                         th:text="${'Тип: ' + vozilo.tip.getTip_ime() + ' - Марка: ' + vozilo.getVozilo_marka()}"
