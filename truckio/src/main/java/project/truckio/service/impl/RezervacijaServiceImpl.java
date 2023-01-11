@@ -62,4 +62,10 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     public List<Rezervacija> findByRuta(Integer ruta_id) {
         return this.rezervacijaRepository.findByRuta(ruta_id);
     }
+
+    @Override
+    public void updateStatus(Rezervacija rezervacija, String status) {
+        rezervacija.setRezervacija_status(status);
+        this.rezervacijaRepository.save(rezervacija);
+    }
 }

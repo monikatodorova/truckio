@@ -70,9 +70,7 @@ public class DispatcherController {
         }
 
         Rezervacija rezervacija = this.rezervacijaService.findById(Integer.parseInt(rezervacija_id));
-        String status = "Завршена";
-
-        rezervacija.setRezervacija_status(status);
+        rezervacijaService.updateStatus(rezervacija, "Завршена");
         return "redirect:/dispatcher/activeRoutes";
 
     }

@@ -1,6 +1,8 @@
 package project.truckio.model;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 
