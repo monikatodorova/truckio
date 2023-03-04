@@ -14,4 +14,6 @@ public interface RezervacijaService {
     List<Rezervacija> finAllRezervaciiByCompany(Integer kompanija_id);
     List<Rezervacija> findByRuta(Integer ruta_id);
 
+    void updateStatus(Rezervacija rezervacija, String status);
+
 }

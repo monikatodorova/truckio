@@ -160,7 +160,12 @@ public class AdministratorController {
 
         Rezervacija rezervacija = rezervacijaService.findById(rezervacija_id);
 
-        if(status.equals("Aктивна") && iznos == null) {
+        if(status.equals("откажана")) {
+            rezervacijaService.updateStatus(rezervacija, "Откажана");
+            return "redirect:/reservationsToConfirm";
+        }
+
+        if(status.equals("активна") && iznos == null) {
             List<Roba> robaList = robaService.findRobaForReservation(Integer.valueOf(rezervacija_id));
 
             model.addAttribute("rezervacija", rezervacija);
@@ -170,13 +175,7 @@ public class AdministratorController {
             return "reservationToConfirmDetails.html";
         }
 
-        rezervacija.setRezervacija_status(status);
-
-        if(status.equals("Oткажана")) {
-            System.out.println("STATUS SET");
-            System.out.println(rezervacija.getRezervacija_status());
-            return "redirect:/reservationsToConfirm";
-        }
+        rezervacijaService.updateStatus(rezervacija, "Активна");
 
         Vraboten vraboten = (Vraboten) request.getSession().getAttribute("vraboten");
         fakturaService.addFaktura(iznos, rezervacija_id, vraboten.getVraboten_id());

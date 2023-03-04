@@ -47,6 +47,9 @@
 
         <div class="container">
             <h3>Резервации за одобрување</h3>
+            <div class="message" th:if="${rezervacii.isEmpty()}">
+                <p>Нема резервации за одобрување.</p>
+            </div>
             <div th:each="rezervacija : ${rezervacii}">
                 <div class="reservation-box">
                     <div class="row">
