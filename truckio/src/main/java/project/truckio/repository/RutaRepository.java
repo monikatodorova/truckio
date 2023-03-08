@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import project.truckio.model.Ruta;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -29,4 +30,7 @@ public interface RutaRepository extends JpaRepository<Ruta, Integer>{
             "       where  " +
             "       lower(rezervacija.rezervacija_status) LIKE 'активна' and dispecer.dispecer_id = :dispecer_id ", nativeQuery = true)
     public List<Ruta> findAllActiveByDispecer(Integer dispecer_id);
+
+    @Query(value = "select * from project.ruti r where r.datum_poagjanje > :fromDate and r.datum_pristignuvanje < :toDate", nativeQuery = true)
+    public List<Ruta> findAllByDatum_poagjanjeAfterAndDatum_pristiganjeBefore(LocalDate fromDate, LocalDate toDate);
 }
