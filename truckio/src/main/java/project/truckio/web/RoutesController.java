@@ -11,6 +11,8 @@ import project.truckio.service.RobaService;
 import project.truckio.service.RutaService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -31,7 +33,9 @@ public class RoutesController {
     }
 
     @GetMapping
-    public String getAvailableRoutes(HttpServletRequest request, Model model){
+    public String getAvailableRoutes(HttpServletRequest request, Model model,
+                                     @RequestParam (required = false) String dateFrom,
+                                     @RequestParam (required = false) String dateTo){
 
         String role = (String) request.getSession().getAttribute("role");
         if(!role.equals("klient")) {
@@ -39,6 +43,14 @@ public class RoutesController {
         }
 
         List<Ruta> ruti = this.rutaService.findAllAvailable();
+        if(dateFrom != null && dateTo != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate trgnuva = LocalDate.parse(dateFrom, formatter);
+            LocalDate pristignuva = LocalDate.parse(dateTo, formatter);
+
+            ruti = this.rutaService.findAllInDateInterval(trgnuva, pristignuva);
+        }
+
         model.addAttribute("ruti", ruti);
 
         return "listRoutes.html";

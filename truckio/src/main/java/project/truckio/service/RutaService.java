@@ -14,4 +14,6 @@ public interface RutaService {
     List<Ruta> findAllAvailable();
     List<Ruta> findAllActiveByVozac(Integer vozac_id);
     List<Ruta> findAllActiveByDispecer(Integer dispecer_id);
+
+    List<Ruta> findAllInDateInterval(LocalDate from, LocalDate to);
 }

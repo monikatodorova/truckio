@@ -66,4 +66,9 @@ public class RutaServiceImpl implements RutaService {
     public List<Ruta> findAllActiveByDispecer(Integer dispecer_id) {
         return this.rutaRepository.findAllActiveByDispecer(dispecer_id);
     }
+
+    @Override
+    public List<Ruta> findAllInDateInterval(LocalDate from, LocalDate to) {
+        return this.rutaRepository.findAllByDatum_poagjanjeAfterAndDatum_pristiganjeBefore(from, to);
+    }
 }

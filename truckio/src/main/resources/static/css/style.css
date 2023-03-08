@@ -44,6 +44,7 @@ body{
     color: var(--secondary-red)!important;
 }
 
+
 /* NAVBAR */
 .navbar {
     padding: 10px 0;
@@ -789,6 +790,26 @@ body{
 }
 .notAuthorized .btn-primary {
     padding: 10px 20px;
+}
+
+
+/* FILTER */
+#submitFilter {
+    display: inline-block;
+}
+.dateFilter {
+    width: auto;
+    display: inline-block;
+}
+input.dateFilter {
+    margin-right: 20px;
+}
+p.dateFilter {
+    margin: 0px;
+    display: inline-block;
+}
+form.dateFilter {
+    float: right;
 }
 
 

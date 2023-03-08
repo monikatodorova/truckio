@@ -42,7 +42,25 @@
     <div class="routes">
 
         <div class="container">
-            <h3>Достапни рути</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Достапни рути</h3>
+                </div>
+                <div class="col-md-8">
+                    <form method="get" action="/routes" class="dateFilter">
+                        <p class="dateFilter">Од</p>
+                        <input type="date" name="dateFrom" class="form-control dateFilter" placeholder="Од"
+                               required="">
+                        <p class="dateFilter">До</p>
+                        <input type="date" name="dateTo" class="form-control dateFilter" placeholder="До"
+                               required="">
+                        <button id="submitFilter" class="btn btn-primary" type="submit">Филтрирај</button>
+                    </form>
+                </div>
+            </div>
+            <div class="message" th:if="${ruti.isEmpty()}">
+                <p>Нема достапни рути.</p>
+            </div>
             <div th:each="ruta : ${ruti}">
                 <div class="route-box">
                     <div class="row">
